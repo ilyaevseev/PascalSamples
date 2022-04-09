@@ -1,9 +1,17 @@
 program SeaBattle_GenerateMap;
 
+{$IFDEF FPC}
+{$MODE OBJFPC}   { ..return value from function via Result variable }
+{$ENDIF}
+
 const
   MapSize     = 10;
   MaxShipLen  = 4;
+{$IFDEF MODERNPASCAL}
   ShipsCount  : array[1..MaxShipLen] of integer = [4, 3, 2, 1];
+{$ELSE}
+  ShipsCount  : array[1..MaxShipLen] of integer = (4, 3, 2, 1);
+{$ENDIF}
 
 type
   MapType = array[1..MapSize] of array[1..MapSize] of integer;
@@ -117,6 +125,7 @@ var
 begin
   Result  := False;
   Current := 0;
+  FillChar(Map, Sizeof(Map), #0);
   for Len := MaxShipLen downto 1 do
   begin
     for n := 1 to ShipsCount[len] do
@@ -147,7 +156,6 @@ var
 
 begin
   Randomize;
-  FillChar(Map, Sizeof(Map), #0);  { ClearMap(map); }
   if not FillMap(map) then Writeln('ERROR: FillMap');
   PrintMap(map);
 end.
