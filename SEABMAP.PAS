@@ -1,8 +1,10 @@
-program SeaBattle_GenerateMap;
+unit SEABMAP;
 
 {$IFDEF FPC}
 {$MODE OBJFPC}   { ..return value from function via Result variable }
 {$ENDIF}
+
+interface
 
 const
   MapSize     = 10;
@@ -15,6 +17,19 @@ const
 
 type
   MapType = array[1..MapSize] of array[1..MapSize] of integer;
+
+procedure GetRandomPos(var X, Y: integer; ShipLen: integer);
+function OutOfRange(X, Y: integer) : boolean;
+function ShiftPos(var X, Y: integer; DX: integer) : boolean;
+function CellUsed(var Map: MapType; X, Y: integer) : boolean;
+function RegionUsed(var Map: MapType; X0, Y0: integer) : boolean;
+function TryShipOriented(var Map: MapType; X0, Y0, ShipLen, ShipID, DX, DY: integer): boolean;
+function TryShip(var Map: MapType; X, Y, ShipLen, ShipID: integer): boolean;
+function NewShip(var Map: MapType; ShipLen, ShipID: integer) : boolean;
+function FillMap(var Map: MapType) : boolean;
+procedure PrintMap(var Map: MapType);
+
+implementation
 
 procedure GetRandomPos(var X, Y: integer; ShipLen: integer);
 begin
@@ -151,11 +166,6 @@ begin
   end;
 end;
 
-var
-  map: MapType;
-
 begin
   Randomize;
-  if not FillMap(map) then Writeln('ERROR: FillMap');
-  PrintMap(map);
 end.
