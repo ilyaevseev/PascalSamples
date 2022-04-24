@@ -114,8 +114,8 @@ begin
   if Random(2) > 0 then Direction:=1 else Direction:=-1;
   X2 := X1;
   Y2 := Y1;
-  repeat if TryShip(Map, X1, Y1, ShipLen, ShipID) then Exit; until not ShiftPos(X1, Y1, Direction);
-  repeat if TryShip(Map, X2, Y2, ShipLen, ShipID) then Exit; until not ShiftPos(X2, Y2, Direction * -1);
+  repeat if TryShip(Map, X1, Y1, ShipLen, ShipID) then Exit; until not ShiftPos(X1, Y1,  Direction);
+  repeat if TryShip(Map, X2, Y2, ShipLen, ShipID) then Exit; until not ShiftPos(X2, Y2, -Direction);
   Result := False;
 end;
 
