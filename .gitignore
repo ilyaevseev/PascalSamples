@@ -1,0 +1,10 @@
+### ignore executables
+*
+
+### dont ignore files with extension and subdirs
+!*.*
+!*/
+
+### but ignore object files
+*.o
+*.ppu
