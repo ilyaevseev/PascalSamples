@@ -1,6 +1,6 @@
 program SeaBattle_GenerateMap;
 
-uses SEABMAP;
+uses seabmap;
 
 var
   map: MapType;

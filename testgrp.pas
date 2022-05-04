@@ -4,7 +4,7 @@ program Test_GetRandomPos;
 {$MODE OBJFPC}   { ..perform typecast in old-manner style }
 {$ENDIF}
 
-uses SEABMAP;
+uses seabmap;
 
 const NumTests = 1000000;
 

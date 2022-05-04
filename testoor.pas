@@ -4,7 +4,7 @@ program Test_OutOfRange;
 {$MODE OBJFPC}   { Result variable }
 {$ENDIF}
 
-uses SEABMAP;
+uses seabmap;
 
 function Test(x, y: integer; retval: boolean) : boolean;
 begin
