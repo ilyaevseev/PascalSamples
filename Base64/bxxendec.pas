@@ -21,7 +21,6 @@ const
    PaddingChar = '=';
    BitsPerByte = 8;
    HighBitMask = $80;  {** $80 hex = 128 decimal = 10000000 binary **}
-   LowByteMask = $FF;  {** $FF hex = 255 decimal = 11111111 binary **}
 
    Base16dict = '0123456789ABCDEF';
    Base32dict = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + '23456789';
@@ -53,7 +52,7 @@ begin
             if (InByte and HighBitMask) > 0 then inc(OutByte);
 
             {** multiply and strip all except first byte **}
-            InByte := ((InByte shl 1) and LowByteMask);
+            InByte := InByte shl 1;
 
             inc(OutBit);
             if OutBit >= OutBits then
@@ -93,7 +92,7 @@ begin
     InBitmask := (1 shl (InBits - 1));
 
     {** Strip padding chars: **}
-    while (InLen > 0) and (InData[InLen] = '=') do Dec(InLen);
+    while (InLen > 0) and (InData[InLen] = PaddingChar) do Dec(InLen);
 
     for InPos := 1 to InLen do
     begin
@@ -124,5 +123,4 @@ function Base32decode(const S: string): string; begin Result := Decode(S, Base32
 function Base64encode(const S: string): string; begin Result := Encode(S, Base64dict, 6); end;
 function Base64decode(const S: string): string; begin Result := Decode(S, Base64dict, 6); end;
 
-begin
 end.
